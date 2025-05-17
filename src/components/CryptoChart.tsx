@@ -70,7 +70,7 @@ const generateMockData = (activePeriod) => {
 
 const CryptoChart = () => {
   const [activeTab, setActiveTab] = useState("Chart");
-  const [activeTimePeriod, setActiveTimePeriod] = useState("1w");
+  const [activeTimePeriod, setActiveTimePeriod] = useState("1y");
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [price, setPrice] = useState(null);
   const chartData = useMemo(() => {
@@ -84,7 +84,9 @@ const CryptoChart = () => {
   const handlePriceChange = () => {
     const valueChange =
       Number(price?.value) - Number(chartData[chartData.length - 1].value);
-    const percentChange = Number((valueChange / price?.value) * 100).toFixed(2);
+    const percentChange = Number(
+      (valueChange / price?.value || 0) * 100
+    ).toFixed(2);
     const isPositive = Number(percentChange) >= 0;
 
     return {
